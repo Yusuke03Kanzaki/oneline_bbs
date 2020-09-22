@@ -1,4 +1,5 @@
 <?php
+// print_r($_SERVER['REQUEST_METHOD']);  ページにアクセスする際はGETメソッド
 
 //データベースに接続
 $link = mysqli_connect('127.0.0.1', 'root', 'root', 'oneline_bbs');
@@ -10,8 +11,8 @@ if (!$link) {
 mysqli_select_db($link, 'oneline_bbs');
 $errors = array();
 
-//POSTなら保存処理実行
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//POSTなら保存処理実行。ページにアクセスする際はGETメソッドなのでfalse
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {  
     //名前が正しく入力されているかチェック
     $name = null;
     if (!isset($_POST['name']) || !strlen($_POST['name'])) {
@@ -21,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $name = $_POST['name'];
     }
-    print_r($_POST);
+    // print_r($_POST);
     //一言が正しく入力されているかチェック
     $comment = null;
     if (!isset($_POST['comment']) || !strlen($_POST['comment'])) {
@@ -84,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form action="bbs.php" method="post">  <!--actionは送信先のURI-->
         名前: <input type="text" name='name'/><br>
         ひとこと: <input type="text" name="comment" size="60"/><br>  <!--sizeは文字数-->
-        <input type="submit" name="submit" value="送信">  <!--submitで送信-->
+        <input type="submit" name="submit" value="送信">  <!--submitで送信。bbs.phpにアクセス-->
     </form>
 
     <?php 
