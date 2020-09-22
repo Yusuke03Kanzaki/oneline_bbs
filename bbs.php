@@ -81,16 +81,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endforeach; ?>
       </ul>
       <?php endif; ?>
-    <form action="bbs.php" method="post">
+    <form action="bbs.php" method="post">  <!--actionは送信先のURI-->
         名前: <input type="text" name='name'/><br>
-        ひとこと: <input type="text" name="comment" size="60"/><br>
-        <input type="submit" name="submit" value="送信">
+        ひとこと: <input type="text" name="comment" size="60"/><br>  <!--sizeは文字数-->
+        <input type="submit" name="submit" value="送信">  <!--submitで送信-->
     </form>
 
     <?php 
     //投稿された内容を取得するSQLを作成して結果を取得
     $sql = "SELECT * FROM `post` ORDER BY `created_at` DESC";
-    var_dump($sql);
+    // var_dump($sql);
     $result = mysqli_query($link, $sql);
 
     //取得した結果を$postsに格納
