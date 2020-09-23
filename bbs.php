@@ -9,13 +9,18 @@ if (!$link) {
 
 //データベースを選択する
 mysqli_select_db($link, 'oneline_bbs');
-$errors = array();
+$errors = [];
+// print_r(!isset($_POST['name']));
+var_dump(!strlen($_POST['name']));
+// print_r($_POST['name']);
+
 
 //POSTなら保存処理実行。ページにアクセスする際はGETメソッドなのでfalse
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {  
     //名前が正しく入力されているかチェック
     $name = null;
-    if (!isset($_POST['name']) || !strlen($_POST['name'])) {
+    // print_r(strlen($_POST['name']));
+    if (!isset($_POST['name']) || !strlen($_POST['name'])) {  //!issetは'name'にNULLが入っていればtrueを返す。!strlenは'name'
         $errors['name'] = '名前を入力してください';
     } elseif (strlen($_POST['name']) > 40) {
         $errors['name'] = '名前は４０文字以内で入力してください';
